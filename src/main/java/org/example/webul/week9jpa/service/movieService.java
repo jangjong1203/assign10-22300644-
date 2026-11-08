@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.springframework.transaction.annotation.Transactional;
 /*
 
 Q7. save()를 호출하면 새로운 데이터 등록과 기존 데이터 수정이 어떻게 처리되는가?
@@ -58,15 +58,14 @@ public class movieService {
         movie movie = repository.findById(id).get();
         return movieResponse.from(movie);
     }
-
+    @Transactional
     public movieResponse update(Long id, movieRequest request) {
         if (!repository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found: " + id);
         }
         movie m = repository.findById(id).get();
         m.update(request);
-        movie updated = repository.save(m);
-        return movieResponse.from(updated);
+        return movieResponse.from(m);
     }
 
     public void delete(Long id) {
