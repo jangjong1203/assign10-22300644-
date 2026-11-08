@@ -11,6 +11,25 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+
+Q7. save()를 호출하면 새로운 데이터 등록과 기존 데이터 수정이 어떻게 처리되는가?
+
+받아온 객체의 id값이 비어있다면 새데이터로 판단하고 데이터 등록으로 처리합니다.
+id값이 존재한다면 데이터 수정으로 처리합니다.
+
+Q8. @Transactional과 Dirty Checking은 어떤 관계가 있는가?
+
+Dirty Checking은 DB에서 가져온 객체의 값을 바꾸면, save()를 호출하지 않아도
+JPA가 변경된 내용을 감지해서 자동으로 수정해주는 기능 입니다.
+JPA가 변경을 감지하는 기능은 트랙젝션이 끝나고 Commit이 될때만 작동하기때문에
+메서드에 @Transactional을 붙여주어야만 변경을 감지할수있고, Dirty Checking이 정상적으로 작동합니다.
+
+ */
+
+
+
+
 @Service
 public class movieService {
     private final movieRepository repository;
@@ -57,4 +76,17 @@ public class movieService {
         repository.deleteById(id);
     }
 
+
+    public List<movie> searchByGenre(String genre) {
+        return repository.findByGenre(genre);
+    }
+
+    public List<movie> searchByGenreAndMinTime(Integer rating, Integer runningTime) {
+        return repository.findByRatingGreaterThanEqualAndRunningTimeGreaterThanEqual(rating, runningTime);
+    }
+
+    public List<movie> searchByTitleOrderByTime(String keyword) {
+        return repository.findByTitleContainingOrderByRatingDesc(keyword);
+    }
 }
+
