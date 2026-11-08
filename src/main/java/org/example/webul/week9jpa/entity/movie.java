@@ -25,7 +25,7 @@ runningTime와 같은 필드이름은 running_time 과 같이 변경되어 DB에
 */
 
 @Entity
-@Table(name="moviejpa")
+@Table(name="moviequery")
 @EntityListeners(AuditingEntityListener.class)
 public class movie{
     @Id
