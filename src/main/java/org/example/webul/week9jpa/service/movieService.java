@@ -81,11 +81,11 @@ public class movieService {
         return repository.findByGenre(genre);
     }
 
-    public List<movie> searchByGenreAndMinTime(Integer rating, Integer runningTime) {
+    public List<movie> searchByRatingAndMinTime(Integer rating, Integer runningTime) {
         return repository.findByRatingGreaterThanEqualAndRunningTimeGreaterThanEqual(rating, runningTime);
     }
 
-    public List<movie> searchByTitleOrderByTime(String keyword) {
+    public List<movie> searchByTitleOrderByRating(String keyword) {
         return repository.findByTitleContainingOrderByRatingDesc(keyword);
     }
 }

@@ -2,6 +2,7 @@ package org.example.webul.week9jpa.controller;
 
 import org.example.webul.week9jpa.dto.movieRequest;
 import org.example.webul.week9jpa.dto.movieResponse;
+import org.example.webul.week9jpa.entity.movie;
 import org.example.webul.week9jpa.service.movieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,23 @@ public class movieController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/search/genre")
+    public List<movie> searchByGenre(@RequestParam String genre) {
+        return this.service.searchByGenre(genre);
+    }
+
+    @GetMapping("/search/filter")
+    public List<movie> searchByRatingAndRunningTime(
+            @RequestParam Integer rating,
+            @RequestParam Integer runningTime) {
+        return this.service.searchByRatingAndMinTime(rating, runningTime);
+    }
+
+    @GetMapping("/search/title")
+    public List<movie> searchByTitleOrderByRating(@RequestParam String keyword) {
+        return this.service.searchByTitleOrderByRating(keyword);
     }
 
 }
