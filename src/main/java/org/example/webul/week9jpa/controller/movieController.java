@@ -52,7 +52,7 @@ public class movieController {
 
     @GetMapping("/search/filter")
     public List<movie> searchByRatingAndRunningTime(
-            @RequestParam Integer rating,
+            @RequestParam Double rating,
             @RequestParam Integer runningTime) {
         return this.service.searchByRatingAndMinTime(rating, runningTime);
     }

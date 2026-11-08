@@ -2,6 +2,11 @@ package org.example.webul.week9jpa.entity;
 
 import jakarta.persistence.*;
 import org.example.webul.week9jpa.dto.movieRequest;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
 /*
 ① Entity
 Q1. @Entity, @Id, @GeneratedValue는 각각 어떤 역할을 하는가?
@@ -21,6 +26,7 @@ runningTime와 같은 필드이름은 running_time 과 같이 변경되어 DB에
 
 @Entity
 @Table(name="moviejpa")
+@EntityListeners(AuditingEntityListener.class)
 public class movie{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +46,11 @@ public class movie{
 
     @Column(nullable = false)
     private Integer runningTime;
+
+    @CreatedDate
+    private LocalDateTime createdAt;
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 
     protected movie() { }
 
@@ -81,6 +92,14 @@ public class movie{
 
     public Integer getRunningTime() {
         return runningTime;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 }
 

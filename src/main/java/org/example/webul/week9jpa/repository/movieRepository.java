@@ -36,7 +36,7 @@ public interface movieRepository extends JpaRepository<movie, Long> {
 
     List<movie> findByGenre(String genre);
 
-    List<movie> findByRatingGreaterThanEqualAndRunningTimeGreaterThanEqual(Integer rating,Integer runningTime );
+    List<movie> findByRatingGreaterThanEqualAndRunningTimeGreaterThanEqual(Double rating,Integer runningTime );
 
     List<movie> findByTitleContainingOrderByRatingDesc(String keyword);
 }

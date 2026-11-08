@@ -80,7 +80,7 @@ public class movieService {
         return repository.findByGenre(genre);
     }
 
-    public List<movie> searchByRatingAndMinTime(Integer rating, Integer runningTime) {
+    public List<movie> searchByRatingAndMinTime(Double rating, Integer runningTime) {
         return repository.findByRatingGreaterThanEqualAndRunningTimeGreaterThanEqual(rating, runningTime);
     }
 
